@@ -6,6 +6,7 @@ import { ToolPageSchema, BreadcrumbListSchema } from '@/app/components/SchemaOrg
 import { AuthorBio } from '@/app/components/AuthorBio';
 import { UserQuestions } from '@/app/components/UserQuestions';
 import { siteConfig } from '@/data/site';
+import type { Screenshot } from '@/lib/types';
 
 type Props = {
   params: { slug: string };
@@ -91,7 +92,7 @@ export default async function ToolPage({ params }: Props) {
                       </span>
                     ))}
                   </div>
-                  <div style={{ marginTop: '16px' }}>
+                  <div style={{ marginTop: '16px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                     <a
                       href={tool.url}
                       target="_blank"
@@ -110,6 +111,43 @@ export default async function ToolPage({ params }: Props) {
                     >
                       访问官网
                     </a>
+
+                    {tool.slug === 'ai-content-automation' && (
+                      <>
+                        <Link
+                          href="/reviews/ai-content-automation"
+                          style={{
+                            backgroundColor: 'white',
+                            color: 'var(--color-primary)',
+                            padding: '12px 24px',
+                            borderRadius: '8px',
+                            textDecoration: 'none',
+                            fontWeight: 'bold',
+                            fontSize: '16px',
+                            border: '2px solid var(--color-primary)',
+                            display: 'inline-block'
+                          }}
+                        >
+                          📖 深度评测报告
+                        </Link>
+                        <Link
+                          href="/comparisons/ai-content-automation-vs-others"
+                          style={{
+                            backgroundColor: 'white',
+                            color: 'var(--color-primary)',
+                            padding: '12px 24px',
+                            borderRadius: '8px',
+                            textDecoration: 'none',
+                            fontWeight: 'bold',
+                            fontSize: '16px',
+                            border: '2px solid var(--color-primary)',
+                            display: 'inline-block'
+                          }}
+                        >
+                          ⚖️ 工具对比
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -183,6 +221,47 @@ export default async function ToolPage({ params }: Props) {
                           {item.answer}
                         </p>
                       </details>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {tool.screenshots && tool.screenshots.length > 0 && (
+                <section style={{ marginBottom: '48px' }}>
+                  <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--color-primary)', marginBottom: '24px' }}>
+                    🖼️ 界面展示
+                  </h2>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    {tool.screenshots.map((screenshot: Screenshot, index: number) => (
+                      <div key={index} style={{
+                        border: '1px solid var(--color-border)',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        background: 'var(--color-background-secondary)'
+                      }}>
+                        <div style={{
+                          padding: '16px 20px',
+                          borderBottom: '1px solid var(--color-border)',
+                          background: 'white'
+                        }}>
+                          <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            {screenshot.emoji} {screenshot.title}
+                          </h3>
+                          <p style={{ margin: '8px 0 0 0', color: 'var(--color-text-secondary)', fontSize: '14px' }}>
+                            {screenshot.description}
+                          </p>
+                        </div>
+                        <pre style={{
+                          margin: 0,
+                          padding: '20px',
+                          overflow: 'auto',
+                          fontSize: '12px',
+                          lineHeight: '1.4',
+                          fontFamily: "'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace",
+                          background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+                          color: '#e0e0e0'
+                        }}>{screenshot.content}</pre>
+                      </div>
                     ))}
                   </div>
                 </section>
