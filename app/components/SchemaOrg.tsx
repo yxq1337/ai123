@@ -3,17 +3,14 @@
 import type { Tool, Author } from '@/lib/types'
 import { siteConfig, getAuthorByName } from '@/data/site'
 
-interface OrganizationSchemaProps {
-}
-
-export function OrganizationSchema({}: OrganizationSchemaProps) {
+export function OrganizationSchema({}: {}) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: siteConfig.name,
     description: siteConfig.description,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    url: 'https://ai123-4jk.pages.dev',
+    logo: 'https://ai123-4jk.pages.dev/logo.png',
     foundingDate: siteConfig.foundingDate,
     sameAs: [
       siteConfig.founder.social.linkedin,
@@ -24,6 +21,27 @@ export function OrganizationSchema({}: OrganizationSchemaProps) {
       name: siteConfig.founder.name,
       jobTitle: siteConfig.founder.title,
       description: siteConfig.founder.bio
+    }
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+export function WebSiteSchema({}: {}) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'AI工具评测',
+    url: 'https://ai123-4jk.pages.dev',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://ai123-4jk.pages.dev/tools?q={search_term_string}',
+      'query-input': 'required name=search_term_string'
     }
   }
 
@@ -99,7 +117,15 @@ export function ReviewSchema({ tool, author }: ReviewSchemaProps) {
       description: tool.description,
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
-      url: tool.url
+      url: tool.url,
+      offers: tool.pricing ? {
+        '@type': 'Offer',
+        price: tool.pricing.price || '0',
+        priceCurrency: tool.pricing.currency || 'CNY',
+        availability: 'https://schema.org/InStock'
+      } : undefined,
+      featureList: tool.features?.join(', '),
+      screenshot: tool.images?.[0]
     },
     author: {
       '@type': 'Person',
@@ -146,14 +172,14 @@ export function ArticleSchema({ tool, author }: ArticleSchemaProps) {
       name: siteConfig.name,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteConfig.url}/logo.png`
+        url: 'https://ai123-4jk.pages.dev/logo.png'
       }
     },
     datePublished: tool.createdAt,
     dateModified: tool.updatedAt,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${siteConfig.url}/tools/${tool.slug}`
+      '@id': `https://ai123-4jk.pages.dev/tools/${tool.slug}`
     }
   }
 
@@ -179,6 +205,37 @@ export function BreadcrumbListSchema({ items }: BreadcrumbListSchemaProps) {
       name: item.name,
       item: item.url
     }))
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+interface CollectionPageSchemaProps {
+  name: string
+  description: string
+  items: { name: string; url: string }[]
+}
+
+export function CollectionPageSchema({ name, description, items }: CollectionPageSchemaProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: name,
+    description: description,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: items.map((item, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: item.name,
+        url: item.url
+      }))
+    }
   }
 
   return (

@@ -301,6 +301,146 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* AI Content Automation Feature Section */}
+        <section className="section" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+          <div className="container" style={{ color: 'white' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+              <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.75rem' }}>
+                ⚡ AI内容自动化
+              </h2>
+              <p style={{ fontSize: '1.125rem', opacity: 0.9, maxWidth: '600px', margin: '0 auto', lineHeight: '1.7' }}>
+                让AI自动更新网站内容，用AI替代重复的内容生产，用自动化流程串起发布环节
+              </p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              <Link
+                href="/automation-admin"
+                style={{ textDecoration: 'none' }}
+              >
+                <div style={{
+                  background: 'rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '1.75rem',
+                  borderRadius: '1rem',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s, background 0.2s',
+                  height: '100%'
+                }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+                  }}
+                >
+                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🎛️</div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>管理面板</h3>
+                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
+                    监控系统状态、查看活动日志、管理内容发布
+                  </p>
+                </div>
+              </Link>
+              <Link
+                href="/automation-test"
+                style={{ textDecoration: 'none' }}
+              >
+                <div style={{
+                  background: 'rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '1.75rem',
+                  borderRadius: '1rem',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s, background 0.2s',
+                  height: '100%'
+                }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+                  }}
+                >
+                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✍️</div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>发布文章</h3>
+                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
+                    快速发布新文章，测试AI内容自动化功能
+                  </p>
+                </div>
+              </Link>
+              <Link
+                href="/automation-docs"
+                style={{ textDecoration: 'none' }}
+              >
+                <div style={{
+                  background: 'rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '1.75rem',
+                  borderRadius: '1rem',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s, background 0.2s',
+                  height: '100%'
+                }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+                  }}
+                >
+                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📚</div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>配置文档</h3>
+                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
+                    查看详细的API文档和配置指南
+                  </p>
+                </div>
+              </Link>
+              <Link
+                href="/blog"
+                style={{ textDecoration: 'none' }}
+              >
+                <div style={{
+                  background: 'rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '1.75rem',
+                  borderRadius: '1rem',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s, background 0.2s',
+                  height: '100%'
+                }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+                  }}
+                >
+                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📖</div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>博客文章</h3>
+                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
+                    查看所有通过AI自动化发布的文章
+                  </p>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Recent Updates Section */}
         <section className="section" style={{ background: 'var(--color-background-tertiary)' }}>
           <div className="container">

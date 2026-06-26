@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
+        disallow: ['/api/', '/automation-admin/', '/private/'],
       },
       {
         userAgent: 'GPTBot',
@@ -13,6 +14,10 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'Google-Extended',
+        allow: '/',
+      },
+      {
+        userAgent: 'ClaudeBot',
         allow: '/',
       },
       {
