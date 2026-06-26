@@ -11,72 +11,58 @@ export function AuthorBio({ authorName, eeatMetadata }: AuthorBioProps) {
 
   return (
     <section
-      className="author-bio-section"
+      className="author-bio"
       aria-labelledby="author-heading"
-      style={{
-        marginTop: '48px',
-        padding: '32px',
-        backgroundColor: 'var(--color-background-secondary)',
-        borderRadius: '16px',
-        border: '1px solid var(--color-border)'
-      }}
     >
       <h2
         id="author-heading"
         style={{
-          fontSize: '18px',
-          fontWeight: 'bold',
-          marginBottom: '20px',
+          fontSize: '1.25rem',
+          fontWeight: '700',
+          marginBottom: '1.25rem',
           color: 'var(--color-text)',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px'
+          gap: '0.5rem'
         }}
       >
-        <span style={{ fontSize: '20px' }}>✍️</span>
-        作者背书
+        <span style={{ fontSize: '1.5rem' }}>✍️</span>
+        关于作者
       </h2>
 
-      <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <div
           className="author-avatar"
           aria-hidden="true"
           style={{
-            fontSize: '64px',
-            flexShrink: 0
+            fontSize: '4rem',
+            flexShrink: 0,
+            filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))'
           }}
         >
           {author.avatar}
         </div>
 
-        <div style={{ flex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+        <div style={{ flex: 1, minWidth: '250px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
             <h3
               style={{
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: 'var(--color-primary)',
-                margin: 0
+                fontSize: '1.5rem',
+                fontWeight: '800',
+                margin: 0,
+                background: 'var(--gradient-primary)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
               {author.name}
             </h3>
             {author.verified && (
               <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  backgroundColor: '#10b981',
-                  color: 'white',
-                  padding: '2px 8px',
-                  borderRadius: '999px',
-                  fontSize: '12px',
-                  fontWeight: 'bold'
-                }}
-                aria-label="已验证作者"
+                className="badge badge-success"
               >
-                ✓ 已验证
+                ✓ 已认证专家
               </span>
             )}
           </div>
@@ -84,9 +70,9 @@ export function AuthorBio({ authorName, eeatMetadata }: AuthorBioProps) {
           <p
             style={{
               color: 'var(--color-text-secondary)',
-              fontSize: '14px',
-              marginBottom: '12px',
-              marginTop: 0
+              fontSize: '1rem',
+              marginBottom: '0.75rem',
+              fontWeight: '600'
             }}
           >
             {author.title} · {author.experienceYears}年经验
@@ -95,63 +81,167 @@ export function AuthorBio({ authorName, eeatMetadata }: AuthorBioProps) {
           <p
             style={{
               color: 'var(--color-text)',
-              fontSize: '15px',
-              lineHeight: '1.7',
-              marginBottom: '16px'
+              fontSize: '1rem',
+              lineHeight: '1.75',
+              marginBottom: '1rem'
             }}
           >
             {author.bio}
           </p>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
-            {author.expertise.map((skill, index) => (
-              <span
-                key={index}
-                style={{
-                  backgroundColor: 'white',
-                  color: 'var(--color-text-secondary)',
-                  padding: '4px 12px',
-                  borderRadius: '999px',
-                  fontSize: '12px',
-                  border: '1px solid var(--color-border)'
-                }}
-              >
-                {skill}
-              </span>
-            ))}
+          {/* Credentials */}
+          {author.credentials && author.credentials.length > 0 && (
+            <div style={{ marginBottom: '1rem' }}>
+              <h4 style={{
+                fontSize: '0.875rem',
+                fontWeight: '700',
+                color: 'var(--color-text)',
+                marginBottom: '0.5rem'
+              }}>
+                🎓 专业资质
+              </h4>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {author.credentials.map((cred, idx) => (
+                  <span
+                    key={idx}
+                    className="badge badge-primary"
+                  >
+                    {cred}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Expertise */}
+          <div style={{ marginBottom: '1rem' }}>
+            <h4 style={{
+              fontSize: '0.875rem',
+              fontWeight: '700',
+              color: 'var(--color-text)',
+              marginBottom: '0.5rem'
+            }}>
+              💡 专业领域
+            </h4>
+            <div className="tag-cloud">
+              {author.expertise.map((skill, idx) => (
+                <span
+                  key={idx}
+                  className="tag"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
 
+          {/* Publications */}
+          {author.publications && author.publications.length > 0 && (
+            <div style={{ marginBottom: '1rem' }}>
+              <h4 style={{
+                fontSize: '0.875rem',
+                fontWeight: '700',
+                color: 'var(--color-text)',
+                marginBottom: '0.5rem'
+              }}>
+                📚 出版作品
+              </h4>
+              <ul style={{
+                listStyle: 'none',
+                padding: 0,
+                margin: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.375rem'
+              }}>
+                {author.publications.map((pub, idx) => (
+                  <li key={idx} style={{
+                    fontSize: '0.875rem',
+                    color: 'var(--color-text-secondary)',
+                    paddingLeft: '1rem',
+                    position: 'relative'
+                  }}>
+                    <span style={{
+                      position: 'absolute',
+                      left: 0,
+                      color: 'var(--color-primary)'
+                    }}>
+                      •
+                    </span>
+                    {pub}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Speaking Engagements */}
+          {author.speakingEngagements && author.speakingEngagements.length > 0 && (
+            <div style={{ marginBottom: '1rem' }}>
+              <h4 style={{
+                fontSize: '0.875rem',
+                fontWeight: '700',
+                color: 'var(--color-text)',
+                marginBottom: '0.5rem'
+              }}>
+                🎤 演讲活动
+              </h4>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {author.speakingEngagements.map((talk, idx) => (
+                  <span
+                    key={idx}
+                    style={{
+                      fontSize: '0.75rem',
+                      padding: '0.25rem 0.75rem',
+                      background: 'rgba(139, 92, 246, 0.1)',
+                      color: 'var(--color-secondary)',
+                      borderRadius: '999px',
+                      fontWeight: '500'
+                    }}
+                  >
+                    {talk}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* EEAT Metadata */}
           {eeatMetadata && (
             <div
-              className="eeat-metadata"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '12px',
-                paddingTop: '16px',
+                gap: '0.75rem',
+                paddingTop: '1rem',
+                marginTop: '1rem',
                 borderTop: '1px solid var(--color-border)'
               }}
             >
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                color: eeatMetadata.isHumanReviewed ? '#10b981' : 'var(--color-text-muted)'
+                gap: '0.5rem',
+                color: eeatMetadata.isHumanReviewed ? 'var(--color-success)' : 'var(--color-text-muted)',
+                fontSize: '0.875rem',
+                fontWeight: '500'
               }}>
                 <span>{eeatMetadata.isHumanReviewed ? '✅' : '⚠️'}</span>
-                <span style={{ fontSize: '13px' }}>
-                  {eeatMetadata.isHumanReviewed ? '已人工审核' : '待人工审核'}
+                <span>
+                  {eeatMetadata.isHumanReviewed ? '人工审核通过' : '待人工审核'}
                 </span>
               </div>
 
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                color: 'var(--color-text-secondary)'
+                gap: '0.5rem',
+                color: 'var(--color-text-secondary)',
+                fontSize: '0.875rem',
+                fontWeight: '500'
               }}>
                 <span>🤖</span>
-                <span style={{ fontSize: '13px' }}>
+                <span>
                   AI贡献率: {eeatMetadata.aiContributionPercent}%
                 </span>
               </div>
@@ -159,101 +249,231 @@ export function AuthorBio({ authorName, eeatMetadata }: AuthorBioProps) {
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                color: eeatMetadata.factChecked ? '#10b981' : 'var(--color-text-muted)'
+                gap: '0.5rem',
+                color: eeatMetadata.factChecked ? 'var(--color-success)' : 'var(--color-text-muted)',
+                fontSize: '0.875rem',
+                fontWeight: '500'
               }}>
                 <span>{eeatMetadata.factChecked ? '✓' : '?'}</span>
-                <span style={{ fontSize: '13px' }}>
-                  {eeatMetadata.factChecked ? '已事实核查' : '待事实核查'}
+                <span>
+                  {eeatMetadata.factChecked ? '事实核查完成' : '待事实核查'}
                 </span>
               </div>
 
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                color: 'var(--color-text-secondary)'
+                gap: '0.5rem',
+                color: 'var(--color-text-secondary)',
+                fontSize: '0.875rem',
+                fontWeight: '500'
               }}>
                 <span>📅</span>
-                <span style={{ fontSize: '13px' }}>
+                <span>
                   最后验证: {eeatMetadata.lastVerifiedDate}
                 </span>
               </div>
             </div>
           )}
 
-          {eeatMetadata?.authorExperience && eeatMetadata.authorExperience.length > 0 && (
-            <div style={{ marginTop: '16px' }}>
+          {/* Author's Case Studies */}
+          {author.caseStudies && author.caseStudies.length > 0 && (
+            <div style={{ marginTop: '1.25rem' }}>
               <h4 style={{
-                fontSize: '14px',
-                fontWeight: 'bold',
+                fontSize: '0.875rem',
+                fontWeight: '700',
                 color: 'var(--color-text)',
-                marginBottom: '8px'
+                marginBottom: '0.75rem'
               }}>
-                相关经验
+                🏆 代表案例
               </h4>
-              <ul style={{
-                margin: 0,
-                paddingLeft: '20px',
-                color: 'var(--color-text-secondary)',
-                fontSize: '14px'
-              }}>
-                {eeatMetadata.authorExperience.map((exp, index) => (
-                  <li key={index} style={{ marginBottom: '4px' }}>
-                    {exp}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {eeatMetadata?.verifiedCaseStudies && eeatMetadata.verifiedCaseStudies.length > 0 && (
-            <div style={{ marginTop: '16px' }}>
-              <h4 style={{
-                fontSize: '14px',
-                fontWeight: 'bold',
-                color: 'var(--color-text)',
-                marginBottom: '8px'
-              }}>
-                验证案例
-              </h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {eeatMetadata.verifiedCaseStudies.map((caseStudy, index) => (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {author.caseStudies.map((caseStudy, idx) => (
                   <div
-                    key={index}
+                    key={idx}
                     style={{
-                      backgroundColor: 'white',
-                      padding: '12px 16px',
-                      borderRadius: '8px',
+                      background: 'white',
+                      padding: '1rem',
+                      borderRadius: '0.75rem',
                       border: '1px solid var(--color-border)'
                     }}
                   >
                     <h5 style={{
-                      fontSize: '14px',
-                      fontWeight: 'bold',
+                      fontSize: '0.875rem',
+                      fontWeight: '700',
                       color: 'var(--color-primary)',
-                      margin: '0 0 6px 0'
+                      margin: '0 0 0.375rem 0'
                     }}>
-                      📊 {caseStudy.title}
+                      {caseStudy.title}
                     </h5>
                     <p style={{
-                      fontSize: '13px',
+                      fontSize: '0.8125rem',
                       color: 'var(--color-text-secondary)',
-                      margin: '0 0 6px 0',
+                      margin: '0 0 0.5rem 0',
                       lineHeight: '1.5'
                     }}>
                       {caseStudy.description}
                     </p>
                     <p style={{
-                      fontSize: '13px',
-                      color: '#10b981',
-                      fontWeight: '500',
+                      fontSize: '0.8125rem',
+                      color: 'var(--color-success)',
+                      fontWeight: '600',
                       margin: 0
                     }}>
-                      结果: {caseStudy.outcome}
+                      成果: {caseStudy.outcome}
                     </p>
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {/* EEAT's Verified Case Studies */}
+          {eeatMetadata?.verifiedCaseStudies && eeatMetadata.verifiedCaseStudies.length > 0 && !author.caseStudies && (
+            <div style={{ marginTop: '1.25rem' }}>
+              <h4 style={{
+                fontSize: '0.875rem',
+                fontWeight: '700',
+                color: 'var(--color-text)',
+                marginBottom: '0.75rem'
+              }}>
+                📊 验证案例
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {eeatMetadata.verifiedCaseStudies.map((caseStudy, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: 'white',
+                      padding: '1rem',
+                      borderRadius: '0.75rem',
+                      border: '1px solid var(--color-border)'
+                    }}
+                  >
+                    <h5 style={{
+                      fontSize: '0.875rem',
+                      fontWeight: '700',
+                      color: 'var(--color-primary)',
+                      margin: '0 0 0.375rem 0'
+                    }}>
+                      {caseStudy.title}
+                    </h5>
+                    <p style={{
+                      fontSize: '0.8125rem',
+                      color: 'var(--color-text-secondary)',
+                      margin: '0 0 0.5rem 0',
+                      lineHeight: '1.5'
+                    }}>
+                      {caseStudy.description}
+                    </p>
+                    <p style={{
+                      fontSize: '0.8125rem',
+                      color: 'var(--color-success)',
+                      fontWeight: '600',
+                      margin: 0
+                    }}>
+                      成果: {caseStudy.outcome}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Social Links */}
+          {Object.keys(author.social).length > 0 && (
+            <div style={{ marginTop: '1.25rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                {author.social.twitter && (
+                  <a
+                    href={author.social.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.375rem',
+                      color: 'var(--color-text-secondary)',
+                      fontSize: '0.875rem',
+                      textDecoration: 'none',
+                      padding: '0.5rem 1rem',
+                      background: 'var(--color-background-secondary)',
+                      borderRadius: '0.5rem',
+                      transition: 'all var(--transition-base)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'var(--color-primary)';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'var(--color-background-secondary)';
+                      e.currentTarget.style.color = 'var(--color-text-secondary)';
+                    }}
+                  >
+                    <span>𝕏</span>
+                    Twitter
+                  </a>
+                )}
+                {author.social.linkedin && (
+                  <a
+                    href={author.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.375rem',
+                      color: 'var(--color-text-secondary)',
+                      fontSize: '0.875rem',
+                      textDecoration: 'none',
+                      padding: '0.5rem 1rem',
+                      background: 'var(--color-background-secondary)',
+                      borderRadius: '0.5rem',
+                      transition: 'all var(--transition-base)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#0077b5';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'var(--color-background-secondary)';
+                      e.currentTarget.style.color = 'var(--color-text-secondary)';
+                    }}
+                  >
+                    <span>in</span>
+                    LinkedIn
+                  </a>
+                )}
+                {author.social.github && (
+                  <a
+                    href={author.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.375rem',
+                      color: 'var(--color-text-secondary)',
+                      fontSize: '0.875rem',
+                      textDecoration: 'none',
+                      padding: '0.5rem 1rem',
+                      background: 'var(--color-background-secondary)',
+                      borderRadius: '0.5rem',
+                      transition: 'all var(--transition-base)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#333';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'var(--color-background-secondary)';
+                      e.currentTarget.style.color = 'var(--color-text-secondary)';
+                    }}
+                  >
+                    <span>⚡</span>
+                    GitHub
+                  </a>
+                )}
               </div>
             </div>
           )}
