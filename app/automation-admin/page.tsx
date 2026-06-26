@@ -1,75 +1,61 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import type { AutomationLog } from '@/lib/automation-types';
 
-interface StatusData {
-  status: string;
-  version: string;
-  timestamp: string;
+// 模拟数据
+const mockStatusData = {
+  status: 'online',
+  version: '1.0.0',
+  timestamp: new Date().toISOString(),
   stats: {
-    sites: number;
-    activeSites: number;
-    totalPosts: number;
-    recentLogs: number;
-  };
-  sites: Array<{
-    id: string;
-    name: string;
-    url: string;
-    active: boolean;
-  }>;
-}
+    sites: 2,
+    activeSites: 1,
+    totalPosts: 0,
+    recentLogs: 3
+  },
+  sites: [
+    {
+      id: 'demo-site',
+      name: 'AI工具评测',
+      url: 'https://ai123-4jk.pages.dev',
+      active: true
+    },
+    {
+      id: 'test-site',
+      name: '测试站点',
+      url: 'https://example.com',
+      active: false
+    }
+  ]
+};
 
-interface LogsData {
-  success: boolean;
-  data: AutomationLog[];
-}
-
-// 文章类型
-interface PostData {
-  id: string;
-  title: string;
-  content: string;
-  excerpt?: string;
-  category?: string;
-  author?: string;
-  tags?: string[];
-  createdAt: string;
-}
+const mockLogs = [
+  {
+    id: 'log-1',
+    action: '系统启动',
+    status: 'success',
+    details: 'AI内容自动化系统已启动',
+    timestamp: new Date(Date.now() - 3600000).toISOString()
+  },
+  {
+    id: 'log-2',
+    action: '配置更新',
+    status: 'success',
+    details: '站点配置已更新',
+    timestamp: new Date(Date.now() - 7200000).toISOString()
+  },
+  {
+    id: 'log-3',
+    action: 'API测试',
+    status: 'success',
+    details: 'API连接测试成功',
+    timestamp: new Date(Date.now() - 10800000).toISOString()
+  }
+];
 
 export default function AutomationAdminPage() {
-  const [status, setStatus] = useState<StatusData | null>(null);
-  const [logs, setLogs] = useState<AutomationLog[]>([]);
-  const [posts, setPosts] = useState<PostData[]>([]);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'dashboard' | 'logs' | 'posts'>('dashboard');
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    try {
-      const [statusRes, logsRes] = await Promise.all([
-        fetch('/api/automation/status'),
-        fetch('/api/automation/logs?limit=20')
-      ]);
-
-      const statusData = await statusRes.json();
-      const logsData = await logsRes.json();
-
-      setStatus(statusData);
-      if (logsData.success) {
-        setLogs(logsData.data);
-      }
-    } catch (error) {
-      console.error('加载数据失败:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -79,14 +65,6 @@ export default function AutomationAdminPage() {
       default: return '#6b7280';
     }
   };
-
-  if (loading) {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ fontSize: '18px' }}>加载中...</div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -117,29 +95,13 @@ export default function AutomationAdminPage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px' }}>
             <div>
-              <h1 style={{ fontSize: '26px', fontWeight: 'bold', color: 'var(--color-primary)', marginBottom: '6px' }}>
+              <h1 style={{ fontSize: '28px', fontWeight: 'bold', color: 'var(--color-primary)', marginBottom: '8px' }}>
                 ⚡ AI内容自动化管理
               </h1>
               <p style={{ color: 'var(--color-text-secondary)', margin: 0 }}>
-                监控系统状态、管理内容发布
+                监控系统状态、管理内容发布（演示模式）
               </p>
             </div>
-            <button
-              onClick={loadData}
-              style={{
-                background: 'var(--color-background-secondary)',
-                border: '1px solid var(--color-border)',
-                padding: '10px 18px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-            >
-              🔄 刷新数据
-            </button>
           </div>
 
           {/* 标签页导航 */}
@@ -183,7 +145,7 @@ export default function AutomationAdminPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981' }}></div>
                     <span style={{ fontSize: '24px', fontWeight: 'bold', color: '#166534' }}>
-                      {status?.status === 'online' ? '在线运行' : '离线'}
+                      在线运行
                     </span>
                   </div>
                 </div>
@@ -191,24 +153,24 @@ export default function AutomationAdminPage() {
                 <div style={{ border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                   <div style={{ color: 'var(--color-text-secondary)', fontSize: '14px', marginBottom: '8px' }}>已发布文章</div>
                   <div style={{ fontSize: '28px', fontWeight: 'bold' }}>
-                    {status?.stats.totalPosts || 0}
+                    {mockStatusData.stats.totalPosts}
                   </div>
                   <div style={{ fontSize: '12px', color: 'var(--color-text-secondary)', marginTop: '4px' }}>
-                    活跃站点: {status?.stats.activeSites || 0}
+                    活跃站点: {mockStatusData.stats.activeSites}
                   </div>
                 </div>
 
                 <div style={{ border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                   <div style={{ color: 'var(--color-text-secondary)', fontSize: '14px', marginBottom: '8px' }}>配置站点</div>
                   <div style={{ fontSize: '28px', fontWeight: 'bold' }}>
-                    {status?.sites.length || 0}
+                    {mockStatusData.sites.length}
                   </div>
                 </div>
 
                 <div style={{ border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                   <div style={{ color: 'var(--color-text-secondary)', fontSize: '14px', marginBottom: '8px' }}>API版本</div>
                   <div style={{ fontSize: '28px', fontWeight: 'bold' }}>
-                    {status?.version || '1.0'}
+                    {mockStatusData.version}
                   </div>
                 </div>
               </div>
@@ -220,7 +182,7 @@ export default function AutomationAdminPage() {
                     🌐 已配置站点
                   </div>
                   <div style={{ padding: '12px' }}>
-                    {status?.sites.map(site => (
+                    {mockStatusData.sites.map(site => (
                       <div key={site.id} style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -329,7 +291,7 @@ export default function AutomationAdminPage() {
               <div style={{ padding: '16px' }}>
                 <div style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--color-text-secondary)' }}>
                   <div style={{ fontSize: '48px', marginBottom: '16px' }}>📝</div>
-                  <p>文章管理功能即将推出</p>
+                  <p>文章管理功能（演示模式）</p>
                   <p style={{ marginTop: '8px', fontSize: '14px' }}>现在可以去 <Link href="/blog" style={{ color: 'var(--color-primary)' }}>博客页面</Link> 查看已发布的文章</p>
                 </div>
               </div>
@@ -342,13 +304,13 @@ export default function AutomationAdminPage() {
                 📋 最近活动日志
               </div>
               <div style={{ padding: '16px' }}>
-                {logs.length === 0 ? (
+                {mockLogs.length === 0 ? (
                   <div style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--color-text-secondary)' }}>
                     暂无活动记录
                   </div>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {logs.map(log => (
+                    {mockLogs.map(log => (
                       <div key={log.id} style={{
                         display: 'flex',
                         gap: '12px',
@@ -387,7 +349,7 @@ export default function AutomationAdminPage() {
       </main>
 
       <footer style={{ borderTop: '1px solid var(--color-border)', marginTop: 'auto' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', textAlign: 'center', color: 'var(--color-text-muted)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 16px', textAlign: 'center', color: 'var(--color-text-muted)' }}>
           <p>AI工具评测 © {new Date().getFullYear()}</p>
         </div>
       </footer>

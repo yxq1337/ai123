@@ -19,32 +19,16 @@ export default function AutomationTestPage() {
     setResult(null);
 
     try {
-      const body = {
-        apiKey: 'demo-api-key-12345',
-        siteId: 'demo-site',
-        post: {
-          title,
-          content,
-          excerpt: content.substring(0, 100),
-          category,
-          author,
-          tags: ['AI', '自动化', '内容创作']
-        },
-        options: {
-          autoPublish: true,
-          imageLocalization: true,
-          seoOptimization: true
-        }
-      };
+      // 模拟API调用
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      const response = await fetch('/api/automation/publish', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+      // 模拟成功响应
+      setResult({
+        success: true,
+        message: '文章发布成功（演示模式）',
+        postId: 'demo-post-' + Date.now(),
+        postUrl: '/blog'
       });
-
-      const data = await response.json();
-      setResult(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : '请求失败');
     } finally {
@@ -73,7 +57,7 @@ export default function AutomationTestPage() {
               🧪 API测试工具
             </h1>
             <p style={{ color: 'var(--color-text-secondary)' }}>
-              在这里直接测试AI内容自动化API
+              在这里测试AI内容自动化功能（演示模式）
             </p>
           </div>
 
@@ -167,7 +151,7 @@ export default function AutomationTestPage() {
               </h3>
               <p style={{ marginBottom: '12px' }}>{result.message}</p>
               {result.postId && <p>文章ID: <code style={{ background: '#f3f4f6', padding: '2px 6px', borderRadius: '4px' }}>{result.postId}</code></p>}
-              {result.postUrl && <p>访问地址: <a href={result.postUrl} style={{ color: 'var(--color-primary)' }}>{result.postUrl}</a></p>}
+              {result.postUrl && <p>访问地址: <Link href={result.postUrl} style={{ color: 'var(--color-primary)' }}>{result.postUrl}</Link></p>}
               <div style={{ marginTop: '16px' }}>
                 <Link href="/automation-admin" style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>
                   → 去管理面板查看日志
@@ -184,6 +168,9 @@ export default function AutomationTestPage() {
               <li>查看返回结果</li>
               <li>去管理面板查看活动日志</li>
             </ol>
+            <div style={{ marginTop: '16px', padding: '12px', background: '#fffbea', border: '1px solid #fde68a', borderRadius: '8px', fontSize: '14px' }}>
+              ⚠️ <strong>注意:</strong> 这是演示模式，不会真正发布文章到外部站点。
+            </div>
           </div>
 
         </div>
