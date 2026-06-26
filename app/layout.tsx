@@ -1,5 +1,5 @@
 
-import type { Metadata, Viewport } from 'next'
+import type { Metadata } from 'next'
 import './globals.css'
 import { OrganizationSchema } from '@/app/components/SchemaOrg'
 import { SkipLink } from '@/app/components/InteractiveButton'
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   keywords: 'AI工具,AI写作,AI图像,AI编程,AI评测,AI工具推荐',
 }
 
-export const viewport: Viewport = {
+export const viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
