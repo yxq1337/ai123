@@ -2,6 +2,7 @@ import { getTools, getCategories } from '@/lib/api';
 import Link from 'next/link';
 import { OrganizationSchema } from './components/SchemaOrg';
 import { SkipLink } from './components/InteractiveButton';
+import { FeatureCard } from './components/FeatureCard';
 import { siteConfig } from '@/data/site';
 
 export default async function HomePage() {
@@ -313,130 +314,30 @@ export default async function HomePage() {
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-              <Link
+              <FeatureCard
                 href="/automation-admin"
-                style={{ textDecoration: 'none' }}
-              >
-                <div style={{
-                  background: 'rgba(255,255,255,0.15)',
-                  backdropFilter: 'blur(10px)',
-                  padding: '1.75rem',
-                  borderRadius: '1rem',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  color: 'white',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s, background 0.2s',
-                  height: '100%'
-                }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                  }}
-                >
-                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🎛️</div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>管理面板</h3>
-                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
-                    监控系统状态、查看活动日志、管理内容发布
-                  </p>
-                </div>
-              </Link>
-              <Link
+                emoji="🎛️"
+                title="管理面板"
+                description="监控系统状态、查看活动日志、管理内容发布"
+              />
+              <FeatureCard
                 href="/automation-test"
-                style={{ textDecoration: 'none' }}
-              >
-                <div style={{
-                  background: 'rgba(255,255,255,0.15)',
-                  backdropFilter: 'blur(10px)',
-                  padding: '1.75rem',
-                  borderRadius: '1rem',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  color: 'white',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s, background 0.2s',
-                  height: '100%'
-                }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                  }}
-                >
-                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✍️</div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>发布文章</h3>
-                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
-                    快速发布新文章，测试AI内容自动化功能
-                  </p>
-                </div>
-              </Link>
-              <Link
+                emoji="✍️"
+                title="发布文章"
+                description="快速发布新文章，测试AI内容自动化功能"
+              />
+              <FeatureCard
                 href="/automation-docs"
-                style={{ textDecoration: 'none' }}
-              >
-                <div style={{
-                  background: 'rgba(255,255,255,0.15)',
-                  backdropFilter: 'blur(10px)',
-                  padding: '1.75rem',
-                  borderRadius: '1rem',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  color: 'white',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s, background 0.2s',
-                  height: '100%'
-                }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                  }}
-                >
-                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📚</div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>配置文档</h3>
-                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
-                    查看详细的API文档和配置指南
-                  </p>
-                </div>
-              </Link>
-              <Link
+                emoji="📚"
+                title="配置文档"
+                description="查看详细的API文档和配置指南"
+              />
+              <FeatureCard
                 href="/blog"
-                style={{ textDecoration: 'none' }}
-              >
-                <div style={{
-                  background: 'rgba(255,255,255,0.15)',
-                  backdropFilter: 'blur(10px)',
-                  padding: '1.75rem',
-                  borderRadius: '1rem',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  color: 'white',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s, background 0.2s',
-                  height: '100%'
-                }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-                  }}
-                >
-                  <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📖</div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>博客文章</h3>
-                  <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
-                    查看所有通过AI自动化发布的文章
-                  </p>
-                </div>
-              </Link>
+                emoji="📖"
+                title="博客文章"
+                description="查看所有通过AI自动化发布的文章"
+              />
             </div>
           </div>
         </section>

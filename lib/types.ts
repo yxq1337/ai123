@@ -74,6 +74,12 @@ export interface Tool {
   eeatMetadata: EEAATMetaData;
   faq: FAQItem[];
   screenshots?: Screenshot[];
+  pricing?: {
+    price?: string;
+    currency?: string;
+  };
+  images?: string[];
+  features?: string[];
 }
 
 export interface FAQItem {

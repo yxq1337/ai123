@@ -109,8 +109,8 @@ class AutomationStore {
     const savedPost: ExtendedPostData = {
       ...post,
       content,
-      excerpt: seoData.description || post.excerpt,
-      slug: seoData.slug || post.slug,
+      excerpt: seoData?.description || post.excerpt,
+      slug: seoData?.slug || post.slug,
       id,
       createdAt: now,
       seoData

@@ -326,7 +326,7 @@ export class AIContentEngine {
     content += '\n\n';
 
     // 主体部分
-    sections.forEach((section, idx) => {
+    sections.forEach((section: string, idx: number) => {
       if (idx === 0) return; // 跳过引言，已经生成了
       content += this.generateSection(idea, section, idx);
       content += '\n\n';
