@@ -1,3 +1,5 @@
+'use client'
+
 import type { Author, EEAATMetaData } from '@/lib/types'
 import { siteConfig, getAuthorByName } from '@/data/site'
 
