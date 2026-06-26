@@ -1,4 +1,3 @@
-
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
@@ -16,7 +15,23 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Google-Extended',
         allow: '/',
       },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'CCBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'anthropic-ai',
+        allow: '/',
+      },
+      {
+        userAgent: 'Bytespider',
+        allow: '/',
+      },
     ],
-    sitemap: 'https://yourdomain.com/sitemap.xml',
+    sitemap: 'https://ai123-4jk.pages.dev/sitemap.xml',
   }
 }

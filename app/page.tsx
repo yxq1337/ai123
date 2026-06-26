@@ -23,7 +23,7 @@ export default async function HomePage() {
         </div>
       </header>
 
-      <main>
+      <main id="main-content">
         <section style={{
           background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
           color: 'white',

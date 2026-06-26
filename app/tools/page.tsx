@@ -27,7 +27,7 @@ export default async function ToolsPage() {
         </div>
       </header>
 
-      <main style={{ padding: '48px 0' }}>
+      <main id="main-content" style={{ padding: '48px 0' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
           <h1 style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--color-primary)', marginBottom: '16px' }}>
             全部AI工具

@@ -9,6 +9,28 @@
   --color-text: #1f2937;
   --color-text-secondary: #4b5563;
   --color-text-muted: #9ca3af;
+
+  /* High contrast mode support */
+  --focus-ring-color: #2563eb;
+  --focus-ring-width: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-border: #1f2937;
+    --color-text: #000000;
+    --color-text-secondary: #1f2937;
+  }
 }
 
 * {
@@ -62,4 +84,82 @@ a:hover {
 
 .hover-button:hover {
   background-color: var(--color-primary-dark);
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+/* Ensure interactive elements have proper size */
+button,
+a,
+input,
+select,
+textarea {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Interactive button/link performance styles */
+.interactive-button,
+.interactive-link {
+  will-change: transform;
+}
+
+.interactive-button.active,
+.interactive-link.active {
+  transform: scale(0.98);
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus management for skip link */
+.skip-link:focus {
+  top: 0;
+}
+
+/* Highlight active/focus states for details/summary */
+details summary:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Ensure sufficient touch target sizes */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Performance optimizations */
+img {
+  content-visibility: auto;
+}
+
+/* Smooth scrolling for keyboard navigation */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Selection colors */
+::selection {
+  background-color: var(--color-primary);
+  color: white;
 }

@@ -2,6 +2,10 @@ import { notFound } from 'next/navigation';
 import { getToolBySlug, getTools } from '@/lib/api';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { ToolPageSchema, BreadcrumbListSchema } from '@/app/components/SchemaOrg';
+import { AuthorBio } from '@/app/components/AuthorBio';
+import { UserQuestions } from '@/app/components/UserQuestions';
+import { siteConfig } from '@/data/site';
 
 type Props = {
   params: { slug: string };
@@ -37,6 +41,13 @@ export default async function ToolPage({ params }: Props) {
 
   return (
     <>
+      <ToolPageSchema tool={tool} />
+      <BreadcrumbListSchema items={[
+        { name: '首页', url: siteConfig.url },
+        { name: '全部工具', url: `${siteConfig.url}/tools` },
+        { name: tool.name, url: `${siteConfig.url}/tools/${tool.slug}` }
+      ]} />
+
       <header style={{ borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
           <Link href="/" style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--color-primary)', textDecoration: 'none' }}>
@@ -138,6 +149,51 @@ export default async function ToolPage({ params }: Props) {
                   </ul>
                 </div>
               </div>
+
+              {tool.faq && tool.faq.length > 0 && (
+                <section style={{ marginBottom: '48px' }}>
+                  <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--color-primary)', marginBottom: '20px' }}>
+                    💬 常见问题
+                  </h2>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {tool.faq.map((item, index) => (
+                      <details
+                        key={index}
+                        style={{
+                          backgroundColor: 'var(--color-background-secondary)',
+                          borderRadius: '12px',
+                          padding: '16px 20px'
+                        }}
+                      >
+                        <summary style={{
+                          cursor: 'pointer',
+                          fontSize: '16px',
+                          fontWeight: '600',
+                          color: 'var(--color-text)'
+                        }}>
+                          {item.question}
+                        </summary>
+                        <p style={{
+                          marginTop: '12px',
+                          fontSize: '15px',
+                          color: 'var(--color-text-secondary)',
+                          lineHeight: '1.6',
+                          marginBottom: 0
+                        }}>
+                          {item.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              <AuthorBio
+                authorName={tool.review.author}
+                eeatMetadata={tool.eeatMetadata}
+              />
+
+              <UserQuestions tool={tool} />
             </div>
 
             <aside>

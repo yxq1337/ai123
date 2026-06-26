@@ -1,4 +1,3 @@
-
 export interface Review {
   rating: number
   ourExperience: string
@@ -6,6 +5,37 @@ export interface Review {
   cons: string[]
   author: string
   lastUpdated: string
+}
+
+export interface CaseStudy {
+  title: string
+  description: string
+  outcome: string
+  date: string
+}
+
+export interface EEAATMetaData {
+  isHumanReviewed: boolean
+  aiContributionPercent: number
+  authorExperience: string[]
+  verifiedCaseStudies: CaseStudy[]
+  factChecked: boolean
+  lastVerifiedDate: string
+}
+
+export interface Author {
+  name: string
+  bio: string
+  avatar: string
+  title: string
+  experienceYears: number
+  expertise: string[]
+  verified: boolean
+  social: {
+    twitter?: string
+    linkedin?: string
+    github?: string
+  }
 }
 
 export interface Tool {
@@ -20,15 +50,21 @@ export interface Tool {
   alternatives: string[]
   createdAt: string
   updatedAt: string
+  eeatMetadata: EEAATMetaData
+  faq: FAQItem[]
 }
 
-export interface Author {
+export interface FAQItem {
+  question: string
+  answer: string
+}
+
+export interface SiteConfig {
   name: string
-  bio: string
-  avatar: string
-  social: {
-    twitter?: string
-    linkedin?: string
-    github?: string
-  }
+  description: string
+  logo: string
+  url: string
+  founder: Author
+  foundingDate: string
+  organizationDescription: string
 }
