@@ -391,26 +391,7 @@ export function AuthorBio({ authorName, eeatMetadata }: AuthorBioProps) {
                     href={author.social.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.375rem',
-                      color: 'var(--color-text-secondary)',
-                      fontSize: '0.875rem',
-                      textDecoration: 'none',
-                      padding: '0.5rem 1rem',
-                      background: 'var(--color-background-secondary)',
-                      borderRadius: '0.5rem',
-                      transition: 'all var(--transition-base)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'var(--color-primary)';
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'var(--color-background-secondary)';
-                      e.currentTarget.style.color = 'var(--color-text-secondary)';
-                    }}
+                    className="social-link-twitter"
                   >
                     <span>𝕏</span>
                     Twitter
@@ -421,26 +402,7 @@ export function AuthorBio({ authorName, eeatMetadata }: AuthorBioProps) {
                     href={author.social.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.375rem',
-                      color: 'var(--color-text-secondary)',
-                      fontSize: '0.875rem',
-                      textDecoration: 'none',
-                      padding: '0.5rem 1rem',
-                      background: 'var(--color-background-secondary)',
-                      borderRadius: '0.5rem',
-                      transition: 'all var(--transition-base)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#0077b5';
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'var(--color-background-secondary)';
-                      e.currentTarget.style.color = 'var(--color-text-secondary)';
-                    }}
+                    className="social-link-linkedin"
                   >
                     <span>in</span>
                     LinkedIn
@@ -451,29 +413,9 @@ export function AuthorBio({ authorName, eeatMetadata }: AuthorBioProps) {
                     href={author.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.375rem',
-                      color: 'var(--color-text-secondary)',
-                      fontSize: '0.875rem',
-                      textDecoration: 'none',
-                      padding: '0.5rem 1rem',
-                      background: 'var(--color-background-secondary)',
-                      borderRadius: '0.5rem',
-                      transition: 'all var(--transition-base)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#333';
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'var(--color-background-secondary)';
-                      e.currentTarget.style.color = 'var(--color-text-secondary)';
-                    }}
+                    className="social-link-github"
                   >
-                    <span>⚡</span>
-                    GitHub
+                    <span>⚡</span> GitHub
                   </a>
                 )}
               </div>
