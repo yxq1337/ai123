@@ -123,39 +123,79 @@ export default async function HomePage() {
                     width: '400px',
                     height: '400px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #F6821D 0%, #FFA357 50%, #E66100 100%)',
+                    background: `
+                      radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 8%, transparent 20%),
+                      radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.2) 0%, transparent 50%),
+                      radial-gradient(circle at 50% 50%, #FFB86C 0%, #F6821D 40%, #E66100 70%, #C44D00 100%)
+                    `,
                     position: 'relative',
-                    boxShadow: '0 20px 60px rgba(246, 130, 29, 0.4)'
+                    boxShadow: `
+                      0 0 80px rgba(246, 130, 29, 0.4),
+                      0 20px 60px rgba(0, 0, 0, 0.3),
+                      inset 0 -10px 30px rgba(0, 0, 0, 0.2),
+                      inset 0 10px 30px rgba(255, 255, 255, 0.3)
+                    `
                   }}
                 >
-                  {/* 小球上的装饰线 */}
+                  {/* 高光效果 */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '10%',
+                    left: '15%',
+                    width: '30%',
+                    height: '20%',
+                    borderRadius: '50%',
+                    background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.6) 0%, transparent 70%)',
+                    filter: 'blur(3px)'
+                  }} />
+
+                  {/* 几何装饰线 */}
                   <svg style={{
                     position: 'absolute',
                     inset: 0,
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    opacity: 0.6
                   }} viewBox="0 0 100 100">
-                    {/* 网格线装饰 */}
-                    <g stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" fill="none">
-                      <circle cx="50" cy="50" r="10" />
-                      <circle cx="50" cy="50" r="20" />
-                      <circle cx="50" cy="50" r="30" />
+                    {/* 同心圆形 */}
+                    <g stroke="rgba(255,255,255,0.15)" strokeWidth="0.6" fill="none">
+                      <circle cx="50" cy="50" r="8" />
+                      <circle cx="50" cy="50" r="16" />
+                      <circle cx="50" cy="50" r="24" />
+                      <circle cx="50" cy="50" r="32" />
                       <circle cx="50" cy="50" r="40" />
-                      <line x1="50" y1="10" x2="50" y2="90" />
-                      <line x1="10" y1="50" x2="90" y2="50" />
-                      <line x1="22" y1="22" x2="78" y2="78" />
-                      <line x1="78" y1="22" x2="22" y2="78" />
                     </g>
+
+                    {/* 三角形网格 */}
+                    <g stroke="rgba(255,255,255,0.12)" strokeWidth="0.4" fill="none">
+                      <polygon points="50,10 66,40 34,40" />
+                      <polygon points="50,90 66,60 34,60" />
+                      <polygon points="10,50 40,34 40,66" />
+                      <polygon points="90,50 60,34 60,66" />
+
+                      <polygon points="50,10 82,50 50,90 18,50" />
+                      <polygon points="50,20 70,50 50,80 30,50" />
+                      <polygon points="50,30 60,50 50,70 40,50" />
+                    </g>
+
                     {/* 小星点装饰 */}
-                    <g fill="rgba(255,255,255,0.4)">
-                      <circle cx="50" cy="15" r="1" />
-                      <circle cx="50" cy="85" r="1" />
-                      <circle cx="15" cy="50" r="1" />
-                      <circle cx="85" cy="50" r="1" />
-                      <circle cx="25" cy="25" r="1" />
-                      <circle cx="75" cy="25" r="1" />
-                      <circle cx="25" cy="75" r="1" />
-                      <circle cx="75" cy="75" r="1" />
+                    <g fill="rgba(255,255,255,0.3)">
+                      <circle cx="50" cy="12" r="0.8" />
+                      <circle cx="80" cy="50" r="0.8" />
+                      <circle cx="50" cy="88" r="0.8" />
+                      <circle cx="20" cy="50" r="0.8" />
+                      <circle cx="28" cy="28" r="0.6" />
+                      <circle cx="72" cy="28" r="0.6" />
+                      <circle cx="72" cy="72" r="0.6" />
+                      <circle cx="28" cy="72" r="0.6" />
+                    </g>
+
+                    {/* 斜线装饰 */}
+                    <g stroke="rgba(255,255,255,0.18)" strokeWidth="0.8" fill="none">
+                      <line x1="50" y1="5" x2="50" y2="95" />
+                      <line x1="5" y1="50" x2="95" y2="50" />
+                      <line x1="15" y1="15" x2="85" y2="85" />
+                      <line x1="85" y1="15" x2="15" y2="85" />
                     </g>
                   </svg>
                 </div>
