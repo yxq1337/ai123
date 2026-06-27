@@ -17,14 +17,12 @@ export function FeatureCard({ href, emoji, title, description }: FeatureCardProp
     <Link href={href} style={{ textDecoration: 'none' }}>
       <div
         style={{
-          background: isHovered ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.15)',
-          backdropFilter: 'blur(10px)',
+          background: isHovered ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.08)',
           padding: '1.75rem',
-          borderRadius: '1rem',
-          border: '1px solid rgba(255,255,255,0.2)',
-          color: 'white',
+          border: '2px solid rgba(255,255,255,0.2)',
+          color: 'var(--color-text-inverse)',
           cursor: 'pointer',
-          transition: 'transform 0.2s, background 0.2s',
+          transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
           height: '100%',
           transform: isHovered ? 'translateY(-4px)' : 'translateY(0)'
         }}
@@ -32,8 +30,21 @@ export function FeatureCard({ href, emoji, title, description }: FeatureCardProp
         onMouseLeave={() => setIsHovered(false)}
       >
         <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{emoji}</div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem' }}>{title}</h3>
-        <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>
+        <h3 style={{
+          fontSize: '1.25rem',
+          fontWeight: '700',
+          marginBottom: '0.5rem',
+          fontFamily: 'var(--font-display)',
+          color: 'var(--color-text-inverse)'
+        }}>
+          {title}
+        </h3>
+        <p style={{
+          fontSize: '0.9375rem',
+          color: 'rgba(245, 241, 232, 0.8)',
+          lineHeight: '1.6',
+          margin: 0
+        }}>
           {description}
         </p>
       </div>
