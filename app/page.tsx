@@ -37,27 +37,35 @@ export default async function HomePage() {
       </header>
 
       <main id="main-content">
-        {/* Hero 区域 - 不对称 2:3 分割 */}
-        <section className="hero">
+        {/* Hero 区域 - Cloudflare 风格 */}
+        <section className="hero" style={{
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'white',
+          minHeight: '80vh',
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          {/* 装饰性网格背景 */}
+          <div className="decorative-grid"></div>
+
           <div className="container">
             <div style={{
               display: 'grid',
-              gridTemplateColumns: '2fr 3fr',
+              gridTemplateColumns: '1fr 1fr',
               gap: '4rem',
-              alignItems: 'start',
-              minHeight: '70vh'
+              alignItems: 'center'
             }}>
-              {/* 左侧 - 垂直排版标题 */}
+              {/* 左侧 - 文字内容 */}
               <div style={{
                 position: 'relative',
-                paddingTop: '4rem'
+                zIndex: 2
               }}>
-                <div className="section-number">01</div>
-                <h1 style={{
+                <div style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                  fontSize: '4.5rem',
                   fontWeight: 800,
-                  lineHeight: 0.95,
+                  lineHeight: 1.1,
                   marginBottom: '1.5rem',
                   color: 'var(--color-text)'
                 }}>
@@ -65,113 +73,116 @@ export default async function HomePage() {
                   <span style={{ color: 'var(--color-primary)' }}>真正</span><br />
                   有用的<br />
                   AI 工具
-                </h1>
+                </div>
 
-                <div className="divider-thin" style={{ margin: '2rem 0' }}></div>
+                <div className="geometric-line" style={{ margin: '2rem 0', width: '100px' }}></div>
 
                 <p style={{
-                  fontSize: '1.125rem',
+                  fontSize: '1.25rem',
                   lineHeight: 1.7,
                   color: 'var(--color-text-muted)',
-                  marginBottom: '2rem'
+                  marginBottom: '2.5rem'
                 }}>
                   不是列表的堆砌，是真实使用体验的筛选。<br />
-                  每一个工具都经过深度测试，每一个评分都有理由。
+                  每一个工具都经过深度评测，每一个评分都有理由。
                 </p>
 
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                  <Link href="/tools" className="btn btn-primary">
+                  <Link href="/tools" className="btn btn-primary" style={{
+                    background: 'var(--color-primary)',
+                    color: 'white',
+                    fontWeight: 600,
+                    padding: '1rem 2.5rem',
+                    fontSize: '1.125rem'
+                  }}>
                     浏览全部工具 →
                   </Link>
-                  <Link href="/about" className="btn btn-secondary">
+                  <Link href="/about" className="btn btn-secondary" style={{
+                    border: '2px solid var(--color-text)',
+                    color: 'var(--color-text)',
+                    fontWeight: 600,
+                    padding: '1rem 2.5rem',
+                    fontSize: '1.125rem'
+                  }}>
                     了解我们的方法
                   </Link>
                 </div>
               </div>
 
-              {/* 右侧 - 精选工具展示 */}
+              {/* 右侧 - 转动的橙色小球 */}
               <div style={{
-                position: 'relative'
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}>
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '1rem'
-                }}>
-                  {/* 第一个工具 - 突出显示 */}
-                  {topTools[0] && (
-                    <Link
-                      href={`/tools/${topTools[0].slug}`}
-                      style={{ textDecoration: 'none', gridColumn: 'span 2' }}
-                    >
-                      <div
-                        className="card"
-                        style={{
-                          position: 'relative',
-                          background: 'var(--color-background-dark)',
-                          borderColor: 'var(--color-text)',
-                          padding: '2rem'
-                        }}
-                      >
-                        <div className="featured-badge">编辑推荐</div>
-                        <div style={{
-                          fontSize: '4rem',
-                          marginBottom: '1rem'
-                        }}>
-                          {topTools[0].logo}
-                        </div>
-                        <h3 style={{
-                          fontSize: '1.5rem',
-                          fontWeight: 700,
-                          color: 'var(--color-text-inverse)',
-                          marginBottom: '0.5rem'
-                        }}>
-                          {topTools[0].name}
-                        </h3>
-                        <p style={{
-                          color: 'var(--color-text-muted)',
-                          fontSize: '0.9375rem',
-                          lineHeight: 1.6,
-                          marginBottom: '1rem'
-                        }}>
-                          {topTools[0].description}
-                        </p>
-                        <div className="rating" style={{ fontSize: '1.25rem' }}>
-                          ★ {topTools[0].review.rating}
-                        </div>
-                      </div>
-                    </Link>
-                  )}
+                {/* 转动的橙色小球 */}
+                <div
+                  className="spinning-orb"
+                  style={{
+                    width: '400px',
+                    height: '400px',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #F6821D 0%, #FFA357 50%, #E66100 100%)',
+                    position: 'relative',
+                    boxShadow: '0 20px 60px rgba(246, 130, 29, 0.4)'
+                  }}
+                >
+                  {/* 小球上的装饰线 */}
+                  <svg style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%'
+                  }} viewBox="0 0 100 100">
+                    {/* 网格线装饰 */}
+                    <g stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" fill="none">
+                      <circle cx="50" cy="50" r="10" />
+                      <circle cx="50" cy="50" r="20" />
+                      <circle cx="50" cy="50" r="30" />
+                      <circle cx="50" cy="50" r="40" />
+                      <line x1="50" y1="10" x2="50" y2="90" />
+                      <line x1="10" y1="50" x2="90" y2="50" />
+                      <line x1="22" y1="22" x2="78" y2="78" />
+                      <line x1="78" y1="22" x2="22" y2="78" />
+                    </g>
+                    {/* 小星点装饰 */}
+                    <g fill="rgba(255,255,255,0.4)">
+                      <circle cx="50" cy="15" r="1" />
+                      <circle cx="50" cy="85" r="1" />
+                      <circle cx="15" cy="50" r="1" />
+                      <circle cx="85" cy="50" r="1" />
+                      <circle cx="25" cy="25" r="1" />
+                      <circle cx="75" cy="25" r="1" />
+                      <circle cx="25" cy="75" r="1" />
+                      <circle cx="75" cy="75" r="1" />
+                    </g>
+                  </svg>
+                </div>
 
-                  {/* 其他工具 */}
-                  {topTools.slice(1, 5).map((tool, idx) => (
-                    <Link
-                      key={tool.id}
-                      href={`/tools/${tool.slug}`}
-                      style={{ textDecoration: 'none' }}
+                {/* 环绕小球的工具图标 */}
+                <div style={{
+                  position: 'absolute',
+                  inset: '-50px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                  {['🤖', '🎨', '⚡', '🎬', '📝', '💻'].map((emoji, idx) => (
+                    <div
+                      key={idx}
+                      className="float"
+                      style={{
+                        position: 'absolute',
+                        fontSize: '2.5rem',
+                        filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.15))',
+                        animationDelay: `${idx * 0.3}s`,
+                        transform: `rotate(${idx * 60}deg) translateX(220px) rotate(${-idx * 60}deg)`,
+                        opacity: 0.9
+                      }}
                     >
-                      <div
-                        className="card"
-                        style={{
-                          position: 'relative',
-                          height: '100%'
-                        }}
-                      >
-                        <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>
-                          {tool.logo}
-                        </div>
-                        <h4 style={{
-                          fontSize: '1rem',
-                          fontWeight: 700,
-                          marginBottom: '0.25rem'
-                        }}>
-                          {tool.name}
-                        </h4>
-                        <div className="rating" style={{ fontSize: '0.875rem' }}>
-                          ★ {tool.review.rating}
-                        </div>
-                      </div>
-                    </Link>
+                      {emoji}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -180,30 +191,62 @@ export default async function HomePage() {
         </section>
 
         {/* 统计数据区域 */}
-        <section className="section" style={{ background: 'var(--color-background-dark)' }}>
+        <section className="section" style={{
+          background: 'var(--color-background-dark)',
+          borderTop: '3px solid var(--color-primary)',
+          borderBottom: '3px solid var(--color-primary)'
+        }}>
           <div className="container">
             <div className="stats-grid">
-              <div className="stat-item">
-                <div className="stat-number">{tools.length}</div>
-                <div className="stat-label">已评测工具</div>
+              <div className="stat-item" style={{
+                background: 'transparent',
+                border: 'none',
+                textAlign: 'center'
+              }}>
+                <div className="stat-number" style={{
+                  color: 'var(--color-primary)',
+                  fontFamily: 'var(--font-mono)'
+                }}>{tools.length}</div>
+                <div className="stat-label" style={{ color: 'var(--color-text-muted)' }}>已评测工具</div>
               </div>
-              <div className="stat-item">
-                <div className="stat-number">{categories.length}</div>
-                <div className="stat-label">覆盖分类</div>
+              <div className="stat-item" style={{
+                background: 'transparent',
+                border: 'none',
+                textAlign: 'center'
+              }}>
+                <div className="stat-number" style={{
+                  color: 'var(--color-primary)',
+                  fontFamily: 'var(--font-mono)'
+                }}>{categories.length}</div>
+                <div className="stat-label" style={{ color: 'var(--color-text-muted)' }}>覆盖分类</div>
               </div>
-              <div className="stat-item">
-                <div className="stat-number">100K+</div>
-                <div className="stat-label">月活用户</div>
+              <div className="stat-item" style={{
+                background: 'transparent',
+                border: 'none',
+                textAlign: 'center'
+              }}>
+                <div className="stat-number" style={{
+                  color: 'var(--color-primary)',
+                  fontFamily: 'var(--font-mono)'
+                }}>100K+</div>
+                <div className="stat-label" style={{ color: 'var(--color-text-muted)' }}>月活用户</div>
               </div>
-              <div className="stat-item">
-                <div className="stat-number">5</div>
-                <div className="stat-label">评测师</div>
+              <div className="stat-item" style={{
+                background: 'transparent',
+                border: 'none',
+                textAlign: 'center'
+              }}>
+                <div className="stat-number" style={{
+                  color: 'var(--color-primary)',
+                  fontFamily: 'var(--font-mono)'
+                }}>5</div>
+                <div className="stat-label" style={{ color: 'var(--color-text-muted)' }}>评测师</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 分类区域 - 对角线布局 */}
+        {/* 分类区域 */}
         <section className="section">
           <div className="container">
             <div style={{
@@ -213,10 +256,17 @@ export default async function HomePage() {
               alignItems: 'start'
             }}>
               <div>
-                <div className="section-number">02</div>
+                <div style={{
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: 'var(--color-primary)',
+                  fontFamily: 'var(--font-mono)',
+                  marginBottom: '0.5rem'
+                }}>02</div>
                 <h2 style={{
                   fontSize: '2.5rem',
                   fontWeight: 800,
+                  fontFamily: 'var(--font-display)',
                   marginBottom: '0.5rem'
                 }}>
                   按类探索
@@ -231,10 +281,12 @@ export default async function HomePage() {
                   <Link
                     key={category}
                     href={`/categories/${category}`}
-                    className="tag"
+                    className="tag tag-orange"
                     style={{
                       fontSize: '1rem',
-                      padding: '0.75rem 1.5rem'
+                      padding: '0.75rem 1.5rem',
+                      border: '2px solid var(--color-border)',
+                      background: 'white'
                     }}
                   >
                     {category}
@@ -245,32 +297,47 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <div className="divider"></div>
+        <div style={{
+          height: '3px',
+          background: 'linear-gradient(90deg, transparent, var(--color-primary), transparent)',
+          maxWidth: '600px',
+          margin: '0 auto'
+        }}></div>
 
         {/* 分类特选 - 交错布局 */}
         <section className="section">
           <div className="container">
             {/* 写作工具 */}
-            <div style={{ marginBottom: '4rem' }}>
+            <div style={{ marginBottom: '5rem' }}>
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: '3rem',
+                gap: '4rem',
                 alignItems: 'center'
               }}>
                 <div>
-                  <div className="section-number">03</div>
-                  <h2 style={{
-                    fontSize: '2rem',
-                    fontWeight: 800,
+                  <div style={{
+                    fontSize: '0.875rem',
+                    fontWeight: 700,
+                    color: 'var(--color-primary)',
+                    fontFamily: 'var(--font-mono)',
                     marginBottom: '0.5rem'
+                  }}>03</div>
+                  <h2 style={{
+                    fontSize: '2.25rem',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-display)',
+                    marginBottom: '0.75rem'
                   }}>
                     AI 写作工具
                   </h2>
                   <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
                     从灵感迸发至完稿润色，提升写作效率
                   </p>
-                  <Link href="/categories/写作" className="btn btn-secondary">
+                  <Link href="/categories/写作" className="btn btn-secondary" style={{
+                    border: '2px solid var(--color-primary)',
+                    color: 'var(--color-primary)'
+                  }}>
                     查看全部写作工具 →
                   </Link>
                 </div>
@@ -286,12 +353,13 @@ export default async function HomePage() {
                       style={{ textDecoration: 'none' }}
                     >
                       <div
-                        className="card"
+                        className="card card-hover-orange"
                         style={{
                           display: 'flex',
                           gap: '1rem',
                           alignItems: 'center',
                           padding: '1rem 1.25rem',
+                          border: '2px solid var(--color-border)',
                           transform: idx === 1 ? 'translateX(-2rem)' : undefined
                         }}
                       >
@@ -304,7 +372,10 @@ export default async function HomePage() {
                           }}>
                             {tool.name}
                           </h4>
-                          <div className="rating" style={{ fontSize: '0.875rem' }}>
+                          <div className="rating" style={{
+                            fontSize: '0.875rem',
+                            color: 'var(--color-primary)'
+                          }}>
                             ★ {tool.review.rating}
                           </div>
                         </div>
@@ -316,26 +387,36 @@ export default async function HomePage() {
             </div>
 
             {/* 设计工具 */}
-            <div style={{ marginBottom: '4rem' }}>
+            <div style={{ marginBottom: '5rem' }}>
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: '3rem',
+                gap: '4rem',
                 alignItems: 'center'
               }}>
                 <div style={{ order: 2 }}>
-                  <div className="section-number">04</div>
-                  <h2 style={{
-                    fontSize: '2rem',
-                    fontWeight: 800,
+                  <div style={{
+                    fontSize: '0.875rem',
+                    fontWeight: 700,
+                    color: 'var(--color-primary)',
+                    fontFamily: 'var(--font-mono)',
                     marginBottom: '0.5rem'
+                  }}>04</div>
+                  <h2 style={{
+                    fontSize: '2.25rem',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-display)',
+                    marginBottom: '0.75rem'
                   }}>
                     AI 设计工具
                   </h2>
                   <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
                     创意工作者的得力伙伴
                   </p>
-                  <Link href="/categories/设计" className="btn btn-secondary">
+                  <Link href="/categories/设计" className="btn btn-secondary" style={{
+                    border: '2px solid var(--color-primary)',
+                    color: 'var(--color-primary)'
+                  }}>
                     查看全部设计工具 →
                   </Link>
                 </div>
@@ -348,12 +429,13 @@ export default async function HomePage() {
                       style={{ textDecoration: 'none' }}
                     >
                       <div
-                        className="card"
+                        className="card card-hover-orange"
                         style={{
                           display: 'flex',
                           gap: '1rem',
                           alignItems: 'center',
                           padding: '1rem 1.25rem',
+                          border: '2px solid var(--color-border)',
                           transform: idx === 1 ? 'translateX(2rem)' : undefined
                         }}
                       >
@@ -366,7 +448,10 @@ export default async function HomePage() {
                           }}>
                             {tool.name}
                           </h4>
-                          <div className="rating" style={{ fontSize: '0.875rem' }}>
+                          <div className="rating" style={{
+                            fontSize: '0.875rem',
+                            color: 'var(--color-primary)'
+                          }}>
                             ★ {tool.review.rating}
                           </div>
                         </div>
@@ -382,22 +467,32 @@ export default async function HomePage() {
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: '3rem',
+                gap: '4rem',
                 alignItems: 'center'
               }}>
                 <div>
-                  <div className="section-number">05</div>
-                  <h2 style={{
-                    fontSize: '2rem',
-                    fontWeight: 800,
+                  <div style={{
+                    fontSize: '0.875rem',
+                    fontWeight: 700,
+                    color: 'var(--color-primary)',
+                    fontFamily: 'var(--font-mono)',
                     marginBottom: '0.5rem'
+                  }}>05</div>
+                  <h2 style={{
+                    fontSize: '2.25rem',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-display)',
+                    marginBottom: '0.75rem'
                   }}>
                     AI 编程工具
                   </h2>
                   <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
                     开发者的智能助手
                   </p>
-                  <Link href="/categories/编程" className="btn btn-secondary">
+                  <Link href="/categories/编程" className="btn btn-secondary" style={{
+                    border: '2px solid var(--color-primary)',
+                    color: 'var(--color-primary)'
+                  }}>
                     查看全部编程工具 →
                   </Link>
                 </div>
@@ -410,12 +505,13 @@ export default async function HomePage() {
                       style={{ textDecoration: 'none' }}
                     >
                       <div
-                        className="card"
+                        className="card card-hover-orange"
                         style={{
                           display: 'flex',
                           gap: '1rem',
                           alignItems: 'center',
                           padding: '1rem 1.25rem',
+                          border: '2px solid var(--color-border)',
                           transform: idx === 1 ? 'translateX(-2rem)' : undefined
                         }}
                       >
@@ -428,7 +524,10 @@ export default async function HomePage() {
                           }}>
                             {tool.name}
                           </h4>
-                          <div className="rating" style={{ fontSize: '0.875rem' }}>
+                          <div className="rating" style={{
+                            fontSize: '0.875rem',
+                            color: 'var(--color-primary)'
+                          }}>
                             ★ {tool.review.rating}
                           </div>
                         </div>
@@ -441,15 +540,31 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <div className="divider"></div>
+        <div style={{
+          height: '3px',
+          background: 'linear-gradient(90deg, transparent, var(--color-primary), transparent)',
+          maxWidth: '600px',
+          margin: '0 auto'
+        }}></div>
 
         {/* 自动化功能区域 - 深色区块 */}
-        <section className="section" style={{ background: 'var(--color-background-dark)' }}>
+        <section className="section" style={{
+          background: 'var(--color-background-dark)',
+          borderTop: '3px solid var(--color-primary)',
+          borderBottom: '3px solid var(--color-primary)'
+        }}>
           <div className="container" style={{ color: 'var(--color-text-inverse)' }}>
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <div className="section-number">06</div>
+              <div style={{
+                fontSize: '0.875rem',
+                fontWeight: 700,
+                color: 'var(--color-primary)',
+                fontFamily: 'var(--font-mono)',
+                marginBottom: '0.5rem'
+              }}>06</div>
               <h2 style={{
                 fontSize: '2.5rem',
+                fontFamily: 'var(--font-display)',
                 color: 'var(--color-text-inverse)',
                 marginBottom: '0.75rem'
               }}>
@@ -509,10 +624,17 @@ export default async function HomePage() {
               alignItems: 'start'
             }}>
               <div>
-                <div className="section-number">07</div>
+                <div style={{
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: 'var(--color-primary)',
+                  fontFamily: 'var(--font-mono)',
+                  marginBottom: '0.5rem'
+                }}>07</div>
                 <h2 style={{
-                  fontSize: '2rem',
+                  fontSize: '2.25rem',
                   fontWeight: 800,
+                  fontFamily: 'var(--font-display)',
                   marginBottom: '0.5rem'
                 }}>
                   最新更新
@@ -533,10 +655,11 @@ export default async function HomePage() {
                     href={`/tools/${tool.slug}`}
                     style={{ textDecoration: 'none' }}
                   >
-                    <div className="card" style={{
+                    <div className="card card-hover-orange" style={{
                       display: 'flex',
                       gap: '1rem',
-                      alignItems: 'flex-start'
+                      alignItems: 'flex-start',
+                      border: '2px solid var(--color-border)'
                     }}>
                       <div style={{ flex: 1 }}>
                         <div style={{
@@ -583,33 +706,42 @@ export default async function HomePage() {
         <section className="section" style={{ background: 'var(--color-primary)' }}>
           <div className="container" style={{ color: 'var(--color-text-inverse)' }}>
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-              <div className="section-number" style={{ color: 'var(--color-accent)' }}>08</div>
+              <div style={{
+                fontSize: '0.875rem',
+                fontWeight: 700,
+                color: 'white',
+                opacity: 0.8,
+                fontFamily: 'var(--font-mono)',
+                marginBottom: '0.5rem'
+              }}>08</div>
               <h2 style={{
                 fontSize: '2.5rem',
+                fontFamily: 'var(--font-display)',
                 color: 'var(--color-text-inverse)',
-                marginBottom: '2rem'
+                marginBottom: '2.5rem'
               }}>
                 为什么选择我们？
               </h2>
 
               <div style={{
                 display: 'grid',
-                gap: '2rem'
+                gap: '1.5rem'
               }}>
                 <div style={{
                   padding: '2rem',
                   background: 'rgba(255,255,255,0.1)',
-                  border: '2px solid rgba(255,255,255,0.2)'
+                  border: '2px solid rgba(255,255,255,0.3)'
                 }}>
                   <h3 style={{
                     fontSize: '1.25rem',
                     fontWeight: 700,
                     marginBottom: '0.5rem',
-                    color: 'var(--color-text-inverse)'
+                    color: 'var(--color-text-inverse)',
+                    fontFamily: 'var(--font-display)'
                   }}>
                     ✅ 真实体验
                   </h3>
-                  <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, margin: 0 }}>
+                  <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, margin: 0 }}>
                     所有评测都基于实际使用体验，不做虚假宣传
                   </p>
                 </div>
@@ -617,17 +749,18 @@ export default async function HomePage() {
                 <div style={{
                   padding: '2rem',
                   background: 'rgba(255,255,255,0.1)',
-                  border: '2px solid rgba(255,255,255,0.2)'
+                  border: '2px solid rgba(255,255,255,0.3)'
                 }}>
                   <h3 style={{
                     fontSize: '1.25rem',
                     fontWeight: 700,
                     marginBottom: '0.5rem',
-                    color: 'var(--color-text-inverse)'
+                    color: 'var(--color-text-inverse)',
+                    fontFamily: 'var(--font-display)'
                   }}>
                     🎯 专业评测
                   </h3>
-                  <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, margin: 0 }}>
+                  <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, margin: 0 }}>
                     由经验丰富的行业专家进行深度评测
                   </p>
                 </div>
@@ -635,17 +768,18 @@ export default async function HomePage() {
                 <div style={{
                   padding: '2rem',
                   background: 'rgba(255,255,255,0.1)',
-                  border: '2px solid rgba(255,255,255,0.2)'
+                  border: '2px solid rgba(255,255,255,0.3)'
                 }}>
                   <h3 style={{
                     fontSize: '1.25rem',
                     fontWeight: 700,
                     marginBottom: '0.5rem',
-                    color: 'var(--color-text-inverse)'
+                    color: 'var(--color-text-inverse)',
+                    fontFamily: 'var(--font-display)'
                   }}>
                     🔒 客观公正
                   </h3>
-                  <p style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, margin: 0 }}>
+                  <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, margin: 0 }}>
                     不接受厂商付费好评，保持评测独立性
                   </p>
                 </div>
@@ -660,6 +794,7 @@ export default async function HomePage() {
             <h2 style={{
               fontSize: '2.5rem',
               fontWeight: 800,
+              fontFamily: 'var(--font-display)',
               marginBottom: '1rem'
             }}>
               准备好开始了吗？
@@ -667,7 +802,7 @@ export default async function HomePage() {
             <p style={{
               fontSize: '1.125rem',
               color: 'var(--color-text-muted)',
-              marginBottom: '2rem',
+              marginBottom: '2.5rem',
               maxWidth: '600px',
               marginLeft: 'auto',
               marginRight: 'auto',
@@ -675,7 +810,13 @@ export default async function HomePage() {
             }}>
               探索我们评测的 AI 工具，找到最适合你的 AI 助手
             </p>
-            <Link href="/tools" className="btn btn-primary" style={{ fontSize: '1.125rem', padding: '1rem 2.5rem' }}>
+            <Link href="/tools" className="btn btn-primary" style={{
+              background: 'var(--color-primary)',
+              color: 'white',
+              fontSize: '1.125rem',
+              padding: '1.25rem 3rem',
+              fontWeight: 600
+            }}>
               开始探索 →
             </Link>
           </div>
@@ -683,7 +824,10 @@ export default async function HomePage() {
       </main>
 
       {/* 页脚 */}
-      <footer className="footer">
+      <footer className="footer" style={{
+        borderTop: '3px solid var(--color-primary)',
+        background: 'var(--color-background-dark)'
+      }}>
         <div className="footer-content">
           <div style={{
             marginBottom: '1rem',
@@ -696,12 +840,13 @@ export default async function HomePage() {
             <span style={{
               fontSize: '1.25rem',
               fontWeight: 800,
-              fontFamily: 'var(--font-display)'
+              fontFamily: 'var(--font-display)',
+              color: 'var(--color-text-inverse)'
             }}>
               AI 工具图鉴
             </span>
           </div>
-          <p style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>
+          <p style={{ marginBottom: '0.5rem', fontSize: '1rem', color: 'var(--color-text-muted)' }}>
             © {new Date().getFullYear()} AI 工具图鉴
           </p>
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>

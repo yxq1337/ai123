@@ -1,19 +1,21 @@
-/* 新的色彩系统 */
+/* 新的色彩系统 - 融合 Cloudflare 橙色风格 */
 :root {
-  /* 主色调 */
-  --color-primary: #9A4A2F;       /* 深砖红 */
-  --color-secondary: #2C3E50;     /* 深海军蓝 */
-  --color-accent: #D4A373;        /* 砂金色 */
+  /* 主色调 - Cloudflare 橙色系 */
+  --color-primary: #F6821D;       /* Cloudflare 橙色 */
+  --color-primary-dark: #E66100;  /* 深橙色 */
+  --color-primary-light: #FFA357; /* 浅橙色 */
+  --color-secondary: #1A1A1A;     /* 深黑色 */
+  --color-accent: #F6821D;        /* 橙色点缀 */
 
   /* 背景色 */
-  --color-background: #F5F1E8;    /* 浅米色 */
-  --color-background-dark: #1A1410; /* 深棕黑 */
+  --color-background: #FFFFFF;    /* 纯白背景 */
+  --color-background-dark: #1A1A1A; /* 深黑色 */
 
   /* 中性色 */
-  --color-text: #1A1410;          /* 深棕黑正文 */
-  --color-text-muted: #7A6C5D;    /* 暖灰色辅助文本 */
-  --color-text-inverse: #F5F1E8;  /* 反色文本 */
-  --color-border: #C9BDAE;        /* 浅土灰边框 */
+  --color-text: #1A1A1A;          /* 黑色正文 */
+  --color-text-muted: #666666;    /* 灰色辅助文本 */
+  --color-text-inverse: #FFFFFF;  /* 反色文本 */
+  --color-border: #E5E5E5;        /* 浅灰边框 */
 
   /* 字体系统 */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -133,18 +135,16 @@ a:hover {
   border-color: var(--color-text);
 }
 
-/* 卡片样式 - 无圆角 */
+/* 卡片样式 - Cloudflare 简约风格 */
 .card {
   background-color: white;
   border: 2px solid var(--color-border);
   padding: var(--space-md);
-  box-shadow: var(--shadow-sm);
   transition: all var(--transition-base);
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+  border-color: var(--color-primary);
 }
 
 /* 标签样式 */
@@ -206,20 +206,19 @@ a:hover {
   padding: var(--space-3xl) 0;
 }
 
-/* 头部 */
+/* 头部 - Cloudflare 风格 */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
   background-color: var(--color-background);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  border-bottom: 3px solid var(--color-text);
+  border-bottom: 2px solid var(--color-border);
 }
 
 .header-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-md) var(--space-md);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -242,8 +241,8 @@ a:hover {
 }
 
 .nav-link {
-  color: var(--color-text-muted);
-  font-weight: 500;
+  color: var(--color-text);
+  font-weight: 600;
   padding: var(--space-xs) var(--space-sm);
   transition: all var(--transition-fast);
   position: relative;
@@ -257,7 +256,7 @@ a:hover {
 .nav-link.active::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: -12px;
   left: 0;
   right: 0;
   height: 3px;
@@ -464,6 +463,74 @@ a:hover {
   }
 }
 
+/* 转动的橙色小球动画 */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning-orb {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* 几何装饰元素 */
+.geometric-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+/* 装饰性圆点图案 */
+.dotted-pattern {
+  background-image: radial-gradient(circle, var(--color-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+/* Cloudflare 风格的网格装饰 */
+.decorative-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(246, 130, 29, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(246, 130, 29, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* 橙色渐变背景 */
+.orange-gradient {
+  background: linear-gradient(135deg, #F6821D 0%, #FFA357 100%);
+}
+
+/* 橙色主题标签 */
+.tag-orange {
+  border: 2px solid var(--color-border);
+  background: white;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.tag-orange:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: white;
+  transform: none;
+}
+
+/* 橙色主题卡片悬停 */
+.card-hover-orange {
+  transition: all var(--transition-fast);
+}
+
+.card-hover-orange:hover {
+  border-color: var(--color-primary);
+}
+
 /* 减少动画模式 */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -472,5 +539,9 @@ a:hover {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .spinning-orb {
+    animation: none !important;
   }
 }
