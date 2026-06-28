@@ -220,7 +220,7 @@ export class DoubaoClient {
     options: {
       wordCount?: number;
       language?: string;
-      tone?: 'professional' | 'casual' | 'friendly' | 'technical';
+      tone?: 'professional' | 'casual' | 'friendly' | 'technical' | 'educational';
       keywords?: string[];
     } = {}
   ) {
@@ -249,7 +249,7 @@ export class DoubaoClient {
     contentType: string,
     options: {
       wordCount?: number;
-      tone?: 'professional' | 'casual' | 'friendly' | 'technical';
+      tone?: 'professional' | 'casual' | 'friendly' | 'technical' | 'educational';
       keywords?: string[];
     } = {}
   ) {
@@ -259,7 +259,8 @@ export class DoubaoClient {
       professional: '专业、权威的语调',
       casual: '轻松、易懂的语调',
       friendly: '友好、热情的语调',
-      technical: '技术、详细的语调'
+      technical: '技术、详细的语调',
+      educational: '教学、循序渐进的语调'
     }[tone];
 
     const keywordsSection = keywords.length > 0
@@ -553,7 +554,7 @@ A: 答案2
     const qAPairs = faqText.split(/\n\s*(?=Q:)/i);
     for (const pair of qAPairs) {
       const qMatch = pair.match(/Q:\s*(.+?)(?:\n|$)/i);
-      const aMatch = pair.match(/A:\s*(.+?)(?:\n(?=Q:)|$)/is);
+      const aMatch = pair.match(/A:\s*([\s\S]+?)(?:\n(?=Q:)|$)/i);
       if (qMatch && aMatch) {
         faqPairs.push({
           question: qMatch[1].trim(),

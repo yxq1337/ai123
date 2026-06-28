@@ -216,6 +216,7 @@ export function getContentGenerator(options?: GeneratorOptions): ContentGenerato
 
 // 便捷导出
 export {
+  isAIAvailable,
   type ContentGenerationOptions,
   type GeneratedContent,
   type ContentType,

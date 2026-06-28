@@ -179,7 +179,7 @@ export class FallbackContentService implements AIContentService {
     const template = CONTENT_TEMPLATES[options.contentType] || CONTENT_TEMPLATES['blog'];
 
     // 生成标题
-    const title = this.generateTitle(template.titlePatterns, options.topic);
+    const title = this.pickTitle(template.titlePatterns, options.topic);
 
     // 生成内容
     const content = this.generateArticle(
@@ -193,7 +193,7 @@ export class FallbackContentService implements AIContentService {
     const wordCount = this.countWords(content);
     const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
     const excerpt = this.generateExcerpt(content);
-    const keywords = this.generateKeywords(options.topic, options.category);
+    const keywords = this.buildKeywords(options.topic, options.category);
     const faq = PARAGRAPH_GENERATORS.faq(options.topic);
 
     const generationTime = Date.now() - startTime;
@@ -222,12 +222,12 @@ export class FallbackContentService implements AIContentService {
 
   async generateTitle(topic: string, contentType: string): Promise<string> {
     const template = CONTENT_TEMPLATES[contentType as ContentType] || CONTENT_TEMPLATES['blog'];
-    return this.generateTitle(template.titlePatterns, topic);
+    return this.pickTitle(template.titlePatterns, topic);
   }
 
   async generateTitles(topic: string, count: number = 5): Promise<string[]> {
     const allPatterns = Object.values(CONTENT_TEMPLATES).flatMap(t => t.titlePatterns);
-    const uniquePatterns = [...new Set(allPatterns)];
+    const uniquePatterns = Array.from(new Set(allPatterns));
     const shuffled = uniquePatterns.sort(() => Math.random() - 0.5);
 
     return shuffled.slice(0, count).map(pattern =>
@@ -240,7 +240,7 @@ export class FallbackContentService implements AIContentService {
   }
 
   async generateKeywords(title: string, content: string): Promise<string[]> {
-    return this.generateKeywords(title, '');
+    return this.buildKeywords(title, '');
   }
 
   async generateFAQ(topic: string, content: string, count: number = 5): Promise<Array<{ question: string; answer: string }>> {
@@ -248,7 +248,7 @@ export class FallbackContentService implements AIContentService {
     return faq.slice(0, count);
   }
 
-  private generateTitle(patterns: string[], topic: string): string {
+  private pickTitle(patterns: string[], topic: string): string {
     const pattern = patterns[Math.floor(Math.random() * patterns.length)];
     return pattern.replace('{topic}', topic);
   }
@@ -329,7 +329,7 @@ export class FallbackContentService implements AIContentService {
     return excerpt + '...';
   }
 
-  private generateKeywords(topic: string, category: string): string[] {
+  private buildKeywords(topic: string, category: string): string[] {
     const baseKeywords = [topic, category];
     const additionalKeywords = [
       '实用指南',

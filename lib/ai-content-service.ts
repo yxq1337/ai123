@@ -7,7 +7,7 @@ import {
 } from './volcengine-doubao';
 
 export type ContentType = 'blog' | 'review' | 'tutorial' | 'news' | 'comparison' | 'how-to' | 'list';
-export type ContentTone = 'professional' | 'casual' | 'friendly' | 'technical';
+export type ContentTone = 'professional' | 'casual' | 'friendly' | 'technical' | 'educational';
 
 export interface ContentGenerationOptions {
   topic: string;
