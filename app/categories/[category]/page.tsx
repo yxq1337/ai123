@@ -1,15 +1,21 @@
 import { getToolsByCategory, getCategories } from '@/lib/api';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: { category: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const category = decodeURIComponent(params.category);
+
   return {
-    title: `${params.category} - AI工具评测`,
-    description: `发现${params.category}类AI工具，专业评测，真实体验。`
+    title: `${category} AI工具评测与推荐`,
+    description: `发现${category}类 AI 工具的真实评测、优缺点、适用场景和替代方案，快速找到适合你的 AI 工具。`,
+    alternates: {
+      canonical: `/categories/${encodeURIComponent(category)}/`,
+    },
   };
 }
 
@@ -19,8 +25,13 @@ export async function generateStaticParams() {
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const tools = await getToolsByCategory(params.category, 'en');
+  const category = decodeURIComponent(params.category);
+  const tools = await getToolsByCategory(category, 'en');
   const categories = await getCategories('en');
+
+  if (tools.length === 0) {
+    notFound();
+  }
 
   return (
     <>
@@ -44,22 +55,22 @@ export default async function CategoryPage({ params }: Props) {
             ← 返回全部工具
           </Link>
           <h1 style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--color-primary)', marginBottom: '16px' }}>
-            {params.category}
+            {category}
           </h1>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
             {categories.map((cat) => (
               <Link
                 key={cat}
-                href={`/categories/${cat}`}
+                href={`/categories/${encodeURIComponent(cat)}`}
                 className="hover-button"
                 style={{
-                  backgroundColor: cat === params.category ? 'var(--color-primary)' : 'var(--color-background-secondary)',
-                  color: cat === params.category ? 'white' : 'var(--color-text-muted)',
+                  backgroundColor: cat === category ? 'var(--color-primary)' : 'var(--color-background-secondary)',
+                  color: cat === category ? 'white' : 'var(--color-text-muted)',
                   fontSize: '14px',
                   padding: '8px 16px',
                   borderRadius: '999px',
                   textDecoration: 'none',
-                  border: cat === params.category ? '1px solid var(--color-primary)' : '1px solid var(--color-border)'
+                  border: cat === category ? '1px solid var(--color-primary)' : '1px solid var(--color-border)'
                 }}
               >
                 {cat}

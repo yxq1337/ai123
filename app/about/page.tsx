@@ -4,7 +4,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: '关于我们 - AI工具评测',
-  description: '了解AI工具评测网站，我们致力于提供真实、专业的AI工具评测。'
+  description: '了解AI工具评测网站，我们致力于提供真实、专业的AI工具评测。',
+  alternates: {
+    canonical: '/about/',
+  },
 }
 
 export default function AboutPage() {

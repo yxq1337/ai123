@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { OrganizationSchema, WebSiteSchema } from './components/SchemaOrg';
 import { SkipLink } from './components/InteractiveButton';
+import { siteConfig } from '@/data/site';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ai123-4jk.pages.dev'),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: 'AI 工具图鉴 - 真正有用的 AI 工具',
     template: '%s - AI 工具图鉴',
@@ -14,13 +15,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
-    url: 'https://ai123-4jk.pages.dev',
+    url: siteConfig.url,
     siteName: 'AI 工具图鉴',
     title: 'AI 工具图鉴 - 真正有用的 AI 工具',
     description: '专业评测 2026 年最新 AI 工具，真实体验、客观分析，帮你找到最适合的 AI 助手。',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.svg',
         width: 1200,
         height: 630,
         alt: 'AI 工具图鉴',
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AI 工具图鉴 - 真正有用的 AI 工具',
     description: '专业评测 2026 年最新 AI 工具，真实体验、客观分析',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.svg'],
   },
   robots: {
     index: true,
@@ -44,8 +45,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: '/',
+  icons: {
+    icon: '/favicon.svg',
   },
 };
 
@@ -73,7 +74,6 @@ export default function RootLayout({
         />
         <OrganizationSchema />
         <WebSiteSchema />
-        <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
         <SkipLink />

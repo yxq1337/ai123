@@ -3,7 +3,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: '联系方式 - AI工具评测',
-  description: '联系我们，提出建议或推荐AI工具。'
+  description: '联系我们，提出建议或推荐AI工具。',
+  alternates: {
+    canonical: '/contact/',
+  },
 }
 
 export default function ContactPage() {

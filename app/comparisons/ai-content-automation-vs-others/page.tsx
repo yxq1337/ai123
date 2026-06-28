@@ -6,6 +6,9 @@ import { getTools } from '@/lib/api';
 export const metadata: Metadata = {
   title: 'AI内容自动化工具 vs 其他AI写作工具 - 完整对比 | AI工具评测',
   description: '详细对比AI内容自动化工具与ChatGPT、Claude、Notion AI、Jasper等工具的功能、性价比、使用场景。',
+  alternates: {
+    canonical: '/comparisons/ai-content-automation-vs-others/',
+  },
 };
 
 export default async function ComparisonPage() {

@@ -5,6 +5,9 @@ import { siteConfig } from '@/data/site';
 export const metadata: Metadata = {
   title: 'AI内容自动化工具深度评测 - 3个月实测报告 | AI工具评测',
   description: '深入测试AI内容自动化工具3个月，从配置到实际使用效果的完整评测报告，包括内容质量、SEO效果、成本分析等。',
+  alternates: {
+    canonical: '/reviews/ai-content-automation/',
+  },
 };
 
 export default function ReviewPage() {

@@ -9,8 +9,8 @@ export function OrganizationSchema({}: {}) {
     '@type': 'Organization',
     name: siteConfig.name,
     description: siteConfig.description,
-    url: 'https://ai123-4jk.pages.dev',
-    logo: 'https://ai123-4jk.pages.dev/logo.png',
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/logo.svg`,
     foundingDate: siteConfig.foundingDate,
     sameAs: [
       siteConfig.founder.social.linkedin,
@@ -37,10 +37,10 @@ export function WebSiteSchema({}: {}) {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'AI工具评测',
-    url: 'https://ai123-4jk.pages.dev',
+    url: siteConfig.url,
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://ai123-4jk.pages.dev/tools?q={search_term_string}',
+      target: `${siteConfig.url}/tools?q={search_term_string}`,
       'query-input': 'required name=search_term_string'
     }
   }
@@ -172,14 +172,14 @@ export function ArticleSchema({ tool, author }: ArticleSchemaProps) {
       name: siteConfig.name,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://ai123-4jk.pages.dev/logo.png'
+        url: `${siteConfig.url}/logo.svg`
       }
     },
     datePublished: tool.createdAt,
     dateModified: tool.updatedAt,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://ai123-4jk.pages.dev/tools/${tool.slug}`
+      '@id': `${siteConfig.url}/tools/${tool.slug}`
     }
   }
 

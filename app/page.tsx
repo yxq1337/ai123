@@ -1,8 +1,13 @@
+import type { Metadata } from 'next';
 import { getTools, getCategories } from '@/lib/api';
 import Link from 'next/link';
-import { OrganizationSchema } from './components/SchemaOrg';
-import { SkipLink } from './components/InteractiveButton';
 import { FeatureCard } from './components/FeatureCard';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default async function HomePage() {
   const tools = await getTools('en');
@@ -17,9 +22,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <OrganizationSchema />
-      <SkipLink />
-
       {/* 头部 */}
       <header className="header">
         <div className="header-content">
@@ -29,6 +31,14 @@ export default async function HomePage() {
           </Link>
           <nav className="nav">
             <Link href="/" className="nav-link active">首页</Link>
+            <Link href="/blog" className="nav-link">博客</Link>
+            <Link href="/automation-publish" className="nav-link" style={{
+              background: 'var(--color-primary)',
+              color: 'white',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.5rem',
+              fontWeight: 700
+            }}>发布文章</Link>
             <Link href="/tools" className="nav-link">全部工具</Link>
             <Link href="/about" className="nav-link">关于</Link>
             <Link href="/contact" className="nav-link">联系</Link>
@@ -61,7 +71,7 @@ export default async function HomePage() {
                 position: 'relative',
                 zIndex: 2
               }}>
-                <div style={{
+                <h1 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: '4.5rem',
                   fontWeight: 800,
@@ -73,7 +83,7 @@ export default async function HomePage() {
                   <span style={{ color: 'var(--color-primary)' }}>真正</span><br />
                   有用的<br />
                   AI 工具
-                </div>
+                </h1>
 
                 <div className="geometric-line" style={{ margin: '2rem 0', width: '100px' }}></div>
 
@@ -627,28 +637,28 @@ export default async function HomePage() {
               gap: '1.5rem'
             }}>
               <FeatureCard
-                href="/automation-admin"
-                emoji="⚙️"
-                title="管理面板"
-                description="监控系统状态、查看活动日志、管理内容发布"
-              />
-              <FeatureCard
-                href="/automation-test"
-                emoji="✍️"
-                title="发布文章"
-                description="快速发布新文章，测试 AI 内容自动化功能"
-              />
-              <FeatureCard
-                href="/automation-docs"
-                emoji="📚"
-                title="配置文档"
-                description="查看详细的 API 文档和配置指南"
+                href="/automation-publish"
+                emoji="🚀"
+                title="AI 内容发布"
+                description="选题、生成、编辑、发布，AI 全程协助"
               />
               <FeatureCard
                 href="/blog"
                 emoji="📖"
                 title="博客文章"
                 description="查看所有通过 AI 自动化发布的文章"
+              />
+              <FeatureCard
+                href="/automation-admin"
+                emoji="⚙️"
+                title="管理面板"
+                description="监控系统状态、查看活动日志、管理内容发布"
+              />
+              <FeatureCard
+                href="/automation-docs"
+                emoji="📚"
+                title="配置文档"
+                description="查看详细的 API 文档和配置指南"
               />
             </div>
           </div>

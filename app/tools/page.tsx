@@ -4,7 +4,10 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '全部AI工具 - AI工具评测',
-  description: '浏览所有AI工具，按分类筛选，找到最适合你的AI助手。'
+  description: '浏览所有AI工具，按分类筛选，找到最适合你的AI助手。',
+  alternates: {
+    canonical: '/tools/',
+  },
 };
 
 export default async function ToolsPage() {

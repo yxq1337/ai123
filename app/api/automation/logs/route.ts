@@ -1,14 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { automationStore } from '@/lib/automation-store';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-    const siteId = searchParams.get('siteId') || undefined;
-    const limitParam = searchParams.get('limit');
-    const limit = limitParam ? parseInt(limitParam, 10) : 50;
-
-    const logs = await automationStore.getLogs(siteId, limit);
+    const logs = await automationStore.getLogs(undefined, 50);
 
     return NextResponse.json({
       success: true,

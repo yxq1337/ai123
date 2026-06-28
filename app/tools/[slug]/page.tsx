@@ -15,11 +15,20 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tool = await getToolBySlug(params.slug, 'en');
   if (!tool) {
-    return { title: '工具未找到 - AI工具评测' };
+    return {
+      title: '工具未找到 - AI工具评测',
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
   }
   return {
-    title: `${tool.name} - AI工具评测`,
-    description: tool.description
+    title: `${tool.name}评测：优缺点、价格和替代工具`,
+    description: `${tool.description} 查看真实使用体验、核心优缺点、适用场景、常见问题和同类替代工具，帮助你判断是否值得使用。`,
+    alternates: {
+      canonical: `/tools/${tool.slug}/`,
+    },
   };
 }
 

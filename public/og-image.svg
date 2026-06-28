@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="AI工具评测与选型指南">
+  <rect width="1200" height="630" fill="#1A1A1A"/>
+  <path d="M0 560h1200" stroke="#F6821D" stroke-width="8"/>
+  <circle cx="960" cy="210" r="150" fill="#F6821D"/>
+  <circle cx="1008" cy="156" r="38" fill="#FFA357"/>
+  <text x="88" y="165" fill="#F6821D" font-family="Arial, sans-serif" font-size="34" font-weight="700">AI TOOL REVIEW 2026</text>
+  <text x="88" y="285" fill="#FFFFFF" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="74" font-weight="800">AI工具评测与选型指南</text>
+  <text x="88" y="370" fill="#E5E5E5" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="34">实测优缺点、价格、适合人群和替代方案</text>
+  <text x="88" y="476" fill="#FFFFFF" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="28">真实使用场景 · 人工审核 · 持续更新</text>
+</svg>
