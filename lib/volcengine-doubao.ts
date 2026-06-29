@@ -598,5 +598,13 @@ export function getDoubaoClient(): DoubaoClient {
 }
 
 export function isDoubaoConfigured(): boolean {
-  return !!(process.env.VOLCENGINE_API_KEY && process.env.VOLCENGINE_API_KEY !== 'your_api_key_here');
+  const apiKey = process.env.VOLCENGINE_API_KEY;
+  const model = process.env.VOLCENGINE_MODEL;
+
+  return !!(
+    apiKey &&
+    apiKey !== 'your_api_key_here' &&
+    model &&
+    model !== 'ep-20240101000000-xxxxx'
+  );
 }
