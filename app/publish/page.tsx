@@ -76,7 +76,14 @@ export default function PublishPage() {
         body: JSON.stringify(formData)
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({
+        success: false,
+        message: `API 返回异常（HTTP ${res.status}）`
+      }));
+
+      if (!res.ok) {
+        throw new Error(data.message || `API 请求失败（HTTP ${res.status}）`);
+      }
 
       if (data.success) {
         setArticle({
@@ -91,7 +98,8 @@ export default function PublishPage() {
 
     } catch (error) {
       console.error('生成失败:', error);
-      alert('文章生成失败，请重试');
+      const message = error instanceof Error ? error.message : '未知错误';
+      alert(`文章生成失败：${message}`);
       setStep('setup');
     } finally {
       setLoading(false);
